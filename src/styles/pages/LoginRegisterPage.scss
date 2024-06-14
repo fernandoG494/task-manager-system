@@ -1,0 +1,48 @@
+@import "../colors.scss";
+
+.LoginRegister-container {
+  display: flex;
+  height: 100vh;
+  color: $text-principal;
+
+  .left-form {
+    background-color: $background-principal;
+    text-align: center;
+    align-content: center;
+    width: 100%;
+  }
+
+  .right-panel {
+    background-color: $background-secondary;
+    text-align: center;
+    align-content: center;
+    width: 100%;
+
+    .image-wrapper {
+      align-self: center;
+      max-width: 70%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .panel-header {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .panel-body {
+      font-size: 15px;
+      font-weight: lighter;
+    }
+  }
+}
+
+.icon-wrapper {
+  height: 30px;
+  width: 30px;
+}
+
+.task-text {
+  font-size: 20px;
+  margin-left: 10px;
+}
