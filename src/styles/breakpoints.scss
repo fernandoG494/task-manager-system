@@ -1,0 +1,10 @@
+$breakpoint-mobile: 425px;
+$breakpoint-tablet: 600px;
+$breakpoint-desktop: 768px;
+$breakpoint-desktop-xl: 1024px;
+
+@mixin respond-from-to($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max}) {
+    @content;
+  }
+}

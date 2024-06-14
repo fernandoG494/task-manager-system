@@ -1,4 +1,5 @@
 @import "../colors.scss";
+@import "../breakpoints.scss";
 
 .LoginRegister-container {
   display: flex;
@@ -33,6 +34,16 @@
     .panel-body {
       font-size: 15px;
       font-weight: lighter;
+    }
+  }
+
+  @include respond-from-to(0, $breakpoint-tablet) {
+    .right-panel {
+      display: none;
+    }
+
+    .left-form {
+      width: 100%;
     }
   }
 }
