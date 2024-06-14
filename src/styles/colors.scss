@@ -2,3 +2,8 @@ $text-principal: #dfe4ec;
 
 $background-principal: #232429;
 $background-secondary: #333742;
+
+$accent-primary: #1976d2;
+
+$background-disabled: lighten($background-principal, 20%);
+$text-disabled: lighten($text-principal, 40%);

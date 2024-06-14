@@ -1,0 +1,49 @@
+@import "../colors.scss";
+
+.content-wrapper {
+  text-align: left;
+  max-width: 400px;
+
+  .title-text {
+    font-size: larger;
+  }
+}
+
+.form-content-wrapper {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.label-text {
+  color: $text-principal;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.input {
+  background-color: $background-principal;
+  padding: 10px;
+  border: 2px solid $background-secondary;
+  border-radius: 10px;
+
+  color: $text-principal;
+
+  &:focus {
+    border: 2px solid #2764f3 !important;
+  }
+}
+
+.submit-button {
+  margin-top: 10px;
+
+  .MuiButtonBase-root {
+    &.Mui-disabled {
+      background-color: $background-disabled;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+}

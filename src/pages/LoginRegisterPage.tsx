@@ -43,10 +43,10 @@ const LoginRegisterPage = () => {
                   <Tab label="Login" value="1" />
                   <Tab label="Register" value="2" />
                 </TabList>
-                <TabPanel value="1">
+                <TabPanel value="1" className="tabpanel-item">
                   <LoginComponent />
                 </TabPanel>
-                <TabPanel value="2">
+                <TabPanel value="2" className="tabpanel-item">
                   <RegisterComponent />
                 </TabPanel>
               </TabContext>
