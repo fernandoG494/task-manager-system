@@ -1,14 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { useState } from "react";
 import { Stack } from "@mui/system";
 import { Button } from "@mui/material";
 import { FormikValues, useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
 
+import { registerUser } from "../../services/apiService";
 import { IRegisterFormValues } from "../../interfaces/layout.interfaces";
 
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles/components/LoginRegister.scss";
 
 const RegisterComponent = () => {
+  const initialValues: IRegisterFormValues = {
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+  };
+
   const [submitting, setSubmitting] = useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -20,21 +31,37 @@ const RegisterComponent = () => {
       .required("Password is required"),
   });
 
-  const initialValues: IRegisterFormValues = {
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
-  };
-
   const handleSubmit = async (values: FormikValues) => {
     try {
       setSubmitting(true);
-      console.log("=>", values);
-      // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una solicitud a una API
+      const response = await registerUser(values);
+
+      if (response.status == "success") {
+        toast.success(response.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        toast.error(response.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+
       setSubmitting(false);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
       setSubmitting(false);
     }
   };
@@ -141,6 +168,7 @@ const RegisterComponent = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -26,8 +26,8 @@ const LoginComponent = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       setSubmitting(true);
-      console.log("=>", values);
-      // Aquí puedes manejar el envío del formulario, por ejemplo, hacer una solicitud a una API
+      // TODO: add login service here
+      console.log(values);
       setSubmitting(false);
     } catch (error) {
       console.error(error);
