@@ -47,3 +47,9 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .name-lastname-stack {
+    flex-direction: column !important;
+  }
+}
