@@ -1,15 +1,12 @@
 import * as Yup from "yup";
 import { useState } from "react";
+import { Stack } from "@mui/system";
+import { Button } from "@mui/material";
 import { FormikValues, useFormik } from "formik";
 
-import "../../styles/components/LoginRegister.scss";
-import { Button } from "@mui/material";
-import { Stack } from "@mui/system";
+import { ILoginFormValues } from "../../interfaces/layout.interfaces";
 
-interface ILoginFormValues {
-  email: string;
-  password: string;
-}
+import "../../styles/components/LoginRegister.scss";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
