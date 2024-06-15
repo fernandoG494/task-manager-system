@@ -22,4 +22,14 @@ export const registerUser = async (userData: any) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const loginUser = async (userData: any) => {
+  try {
+    const response = await api.post("/user/login", userData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export default api;

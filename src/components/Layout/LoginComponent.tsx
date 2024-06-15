@@ -7,6 +7,8 @@ import { FormikValues, useFormik } from "formik";
 import { ILoginFormValues } from "../../interfaces/layout.interfaces";
 
 import "../../styles/components/LoginRegister.scss";
+import { loginUser } from "../../services/apiService";
+import { ToastContainer, toast } from "react-toastify";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -26,8 +28,31 @@ const LoginComponent = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       setSubmitting(true);
-      // TODO: add login service here
-      console.log(values);
+      const response = await loginUser(values);
+      console.log(response);
+      if (response.user?.isActive) {
+        toast.success(`Welcome back ${response.user.name}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        toast.error(response.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
       setSubmitting(false);
     } catch (error) {
       console.error(error);
@@ -95,6 +120,7 @@ const LoginComponent = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
