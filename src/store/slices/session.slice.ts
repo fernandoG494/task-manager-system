@@ -5,6 +5,7 @@ const initialState: ISessionStore = {
   _id: "",
   name: "",
   roles: [],
+  token: "",
 };
 
 const sessionSlice = createSlice({
@@ -16,8 +17,11 @@ const sessionSlice = createSlice({
       state.name = action.payload.name;
       state.roles = action.payload.roles;
     },
+    setToken: (state, action) => {
+      state.token = action.payload.token;
+    },
   },
 });
 
-export const {} = sessionSlice.actions;
+export const { setSession, setToken } = sessionSlice.actions;
 export default sessionSlice.reducer;

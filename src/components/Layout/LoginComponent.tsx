@@ -9,9 +9,13 @@ import { ILoginFormValues } from "../../interfaces/layout.interfaces";
 import "../../styles/components/LoginRegister.scss";
 import { loginUser } from "../../services/apiService";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setSession, setToken } from "../../store/slices/session.slice";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
+
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -29,8 +33,15 @@ const LoginComponent = () => {
     try {
       setSubmitting(true);
       const response = await loginUser(values);
-      console.log(response);
       if (response.user?.isActive) {
+        const {
+          token,
+          user: { _id, name, roles },
+        } = response;
+
+        dispatch(setToken({ token }));
+        dispatch(setSession({ _id, name, roles }));
+
         toast.success(`Welcome back ${response.user.name}`, {
           position: "top-center",
           autoClose: 5000,
