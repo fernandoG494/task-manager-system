@@ -2,18 +2,20 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { Stack } from "@mui/system";
 import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FormikValues, useFormik } from "formik";
+import { toast } from "react-toastify";
 
+import { loginUser } from "../../services/apiService";
 import { ILoginFormValues } from "../../interfaces/layout.interfaces";
+import { setSession, setToken } from "../../store/slices/session.slice";
 
 import "../../styles/components/LoginRegister.scss";
-import { loginUser } from "../../services/apiService";
-import { ToastContainer, toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setSession, setToken } from "../../store/slices/session.slice";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -40,18 +42,26 @@ const LoginComponent = () => {
         } = response;
 
         dispatch(setToken({ token }));
+        localStorage.setItem("token", JSON.stringify(token));
         dispatch(setSession({ _id, name, roles }));
 
-        toast.success(`Welcome back ${response.user.name}`, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        toast.success(
+          `Welcome back ${response.user.name}, wait until redirection`,
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
+
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 4000);
       } else {
         toast.error(response.response.data.message, {
           position: "top-center",
@@ -131,7 +141,6 @@ const LoginComponent = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Stack } from "@mui/system";
 import { Button } from "@mui/material";
 import { FormikValues, useFormik } from "formik";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { registerUser } from "../../services/apiService";
 import { IRegisterFormValues } from "../../interfaces/layout.interfaces";
@@ -168,7 +168,6 @@ const RegisterComponent = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };
