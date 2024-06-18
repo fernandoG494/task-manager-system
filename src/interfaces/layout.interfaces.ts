@@ -9,3 +9,9 @@ export interface IRegisterFormValues {
   email: string;
   password: string;
 }
+
+export interface ISideMenu {
+  setIsClosing: (arg0: boolean) => void;
+  setMobileOpen: (arg0: boolean) => void;
+  mobileOpen: boolean | undefined;
+}

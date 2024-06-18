@@ -47,6 +47,7 @@ const RegisterComponent = () => {
           progress: undefined,
           theme: "dark",
         });
+        formik.resetForm();
       } else {
         toast.error(response.response.data.message, {
           position: "top-center",
@@ -59,7 +60,6 @@ const RegisterComponent = () => {
           theme: "dark",
         });
       }
-
       setSubmitting(false);
     } catch (error: any) {
       setSubmitting(false);
