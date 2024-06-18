@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import routeReducer from "./slices/route.slice";
 import sessionReducer from "./slices/session.slice";
 
 const store = configureStore({
   reducer: {
     session: sessionReducer,
+    route: routeReducer,
   },
 });
 

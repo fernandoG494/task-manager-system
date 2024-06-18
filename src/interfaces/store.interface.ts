@@ -4,3 +4,7 @@ export interface ISessionStore {
   roles: string[];
   token: string;
 }
+
+export interface IRouteStore {
+  actualRoute: string;
+}

@@ -8,17 +8,23 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CssBaseline from "@mui/material/CssBaseline";
+import { useDispatch, useSelector } from "react-redux";
 
-import "../styles/pages/DashboardPage.scss";
-
+import { RootState } from "../store";
 import { validToken } from "../services/apiService";
 import SideMenu from "../components/Layout/SideMenu";
+import { setRoute } from "../store/slices/route.slice";
+
+import "../styles/pages/DashboardPage.scss";
+import TitleSelector from "../components/Layout/TitleSelector";
 
 const drawerWidth = 300;
 
 const DashboardPage = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const route = useSelector((state: RootState) => state.route.actualRoute);
 
   const [isValid, setIsValid] = useState(true);
 
@@ -37,7 +43,8 @@ const DashboardPage = () => {
       .catch((error) => error);
 
     if (!isValid) {
-      navigate("/");
+      dispatch(setRoute("/login"));
+      navigate("/login");
     }
   }, []);
 
@@ -61,9 +68,7 @@ const DashboardPage = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Project name
-          </Typography>
+          <TitleSelector route={route} />
         </Toolbar>
       </AppBar>
       <Box

@@ -15,3 +15,7 @@ export interface ISideMenu {
   setMobileOpen: (arg0: boolean) => void;
   mobileOpen: boolean | undefined;
 }
+
+export interface ITitleSelector {
+  route: string;
+}

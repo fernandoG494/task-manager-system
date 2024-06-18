@@ -12,6 +12,7 @@ import { ILoginFormValues } from "../../interfaces/layout.interfaces";
 import { setSession, setToken } from "../../store/slices/session.slice";
 
 import "../../styles/components/LoginRegister.scss";
+import { setRoute } from "../../store/slices/route.slice";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -60,8 +61,9 @@ const LoginComponent = () => {
         );
 
         setTimeout(() => {
+          dispatch(setRoute("/dashboard"));
           navigate("/dashboard");
-        }, 4000);
+        }, 3200);
       } else {
         toast.error(response.response.data.message, {
           position: "top-center",
