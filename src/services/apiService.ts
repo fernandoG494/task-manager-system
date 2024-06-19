@@ -38,9 +38,12 @@ export const validToken = async (token: string | null | undefined) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const tokenInfo = await api.get("/user/check-token", config);
+  let tokenInfo;
+  if (token) {
+    tokenInfo = await api.get("/user/check-token", config);
+  }
 
-  if (tokenInfo.status === 200) {
+  if (tokenInfo && tokenInfo.status === 200) {
     return true;
   } else {
     return false;

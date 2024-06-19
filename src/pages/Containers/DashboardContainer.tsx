@@ -36,15 +36,24 @@ const DashboardContainer = () => {
   };
 
   useEffect(() => {
-    validToken(token?.slice(1, -1))
-      .then((res) => setIsValid(res))
-      .catch((error) => error);
+    const verifyToken = async () => {
+      if (token) {
+        const isValid = await validToken(token.slice(1, -1));
+        setIsValid(isValid);
+        if (!isValid) {
+          localStorage.removeItem("token");
+          dispatch(setRoute("/login"));
+          navigate("/login");
+        }
+      } else {
+        setIsValid(false);
+        dispatch(setRoute("/login"));
+        navigate("/login");
+      }
+    };
 
-    if (!isValid) {
-      dispatch(setRoute("/login"));
-      navigate("/login");
-    }
-  }, []);
+    verifyToken();
+  }, [token]);
 
   return (
     <Box sx={{ display: "flex" }}>

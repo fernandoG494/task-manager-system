@@ -39,6 +39,7 @@ const DashboardPage = () => {
                     creationDate={creationDate}
                     description={description}
                     favorite={favorite}
+                    key={name}
                     name={name}
                     progress={progress}
                     tags={tags}
@@ -56,6 +57,7 @@ const DashboardPage = () => {
               return (
                 <TaskItem
                   description={description}
+                  key={name}
                   name={name}
                   status={status}
                 />

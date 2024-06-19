@@ -4,19 +4,28 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { setRoute } from "./store/slices/route.slice";
 import Router from "./routes/Router";
+import { validToken } from "./services/apiService";
+import { setRoute } from "./store/slices/route.slice";
 
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setTimeout(() => {
-        dispatch(setRoute("/"));
-        navigate("/");
-      }, 4000);
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      validToken(token).then((isValid) => {
+        if (isValid) {
+          dispatch(setRoute("/dashboard"));
+          navigate("/dashboard");
+        } else {
+          localStorage.removeItem("token");
+          dispatch(setRoute("/login"));
+          navigate("/login");
+        }
+      });
     } else {
       dispatch(setRoute("/login"));
       navigate("/login");
