@@ -15,7 +15,6 @@ const api = axios.create({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const registerUser = async (userData: any) => {
   try {
-    console.log(userData);
     const response = await api.post("/user", userData);
     return response.data;
   } catch (error) {

@@ -19,14 +19,13 @@ const SideMenu = ({ setIsClosing, setMobileOpen, mobileOpen }: ISideMenu) => {
 
   return (
     <div>
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Drawer
         variant="temporary"
         open={mobileOpen}
         onTransitionEnd={handleDrawerTransitionEnd}
         onClose={handleDrawerClose}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: "block", sm: "none" },

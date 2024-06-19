@@ -24,8 +24,6 @@ const ProjectCard = ({
     // TODO: API config
   };
 
-  // console.log(creationDate, updateDate);
-  // console.log(colorTag, tags);
   return (
     <div
       className="project-card-container"

@@ -7,25 +7,28 @@ import {
   Stack,
 } from "@mui/material";
 import { ReactSVG } from "react-svg";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useLocation, useNavigate } from "react-router-dom";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 
 import IconLogo from "../../assets/svgs/check.svg";
-import { setRoute } from "../../store/slices/route.slice";
+
+import "../../styles/components/Layout/MenuList.scss";
 
 const MenuItemsList = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleCloseSession = () => {
     localStorage.removeItem("token");
-    dispatch(setRoute("/"));
-    navigate("/");
+    navigate("/login");
+  };
+
+  const handleContent = (route: string) => {
+    navigate(`/${route}`);
   };
 
   return (
@@ -43,37 +46,42 @@ const MenuItemsList = () => {
         </Stack>
         <Stack direction="column">
           <MenuList>
-            <MenuItem>
+            <MenuItem
+              onClick={() => handleContent("dashboard")}
+              disabled={location.pathname === "/dashboard"}
+            >
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Dashboard</ListItemText>
             </MenuItem>
-            <MenuItem>
+            <MenuItem
+              onClick={() => handleContent("profile")}
+              disabled={location.pathname === "/profile"}
+            >
               <ListItemIcon>
                 <ManageAccountsIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
-            </MenuItem>
-
-            <MenuItem onClick={() => handleCloseSession()}>
-              <ListItemIcon>
-                <ExitToAppIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText>Log out</ListItemText>
             </MenuItem>
           </MenuList>
 
           <Divider />
 
           <MenuList>
-            <MenuItem>
+            <MenuItem
+              onClick={() => handleContent("tasks")}
+              disabled={location.pathname === "/tasks"}
+            >
               <ListItemIcon>
                 <AssignmentTurnedInIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Tasks</ListItemText>
             </MenuItem>
-            <MenuItem>
+            <MenuItem
+              onClick={() => handleContent("projects")}
+              disabled={location.pathname === "/projects"}
+            >
               <ListItemIcon>
                 <AutoAwesomeMosaicIcon fontSize="small" />
               </ListItemIcon>
@@ -83,8 +91,14 @@ const MenuItemsList = () => {
 
           <Divider />
 
+          <MenuItem onClick={() => handleCloseSession()}>
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Log out</ListItemText>
+          </MenuItem>
           <div className="disclaimer-text">
-            This is an on-building projects, more features will be added on a
+            This is an on-building project, more features will be added in the
             future.
           </div>
         </Stack>

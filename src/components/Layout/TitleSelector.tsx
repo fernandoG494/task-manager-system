@@ -1,17 +1,24 @@
 import { Typography } from "@mui/material";
 
-import { ITitleSelector } from "../../interfaces/layout.interface";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const TitleSelector = ({ route }: ITitleSelector) => {
+const TitleSelector = () => {
   const [title, setTitle] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
-    switch (route) {
+    switch (location.pathname) {
       case "/dashboard":
         setTitle("Dashboard");
+      case "/profile":
+        setTitle("Profile");
+      case "/tasks":
+        setTitle("Tasks");
+      case "/projects":
+        setTitle("Projects");
     }
-  }, [route]);
+  }, [location]);
 
   return (
     <Typography variant="h6" noWrap component="div">

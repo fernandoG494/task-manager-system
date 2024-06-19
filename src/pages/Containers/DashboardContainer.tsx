@@ -6,13 +6,10 @@ import Toolbar from "@mui/material/Toolbar";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
-import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { RootState } from "../../store";
 import { validToken } from "../../services/apiService";
 import SideMenu from "../../components/Layout/SideMenu";
-import { setRoute } from "../../store/slices/route.slice";
 import TitleSelector from "../../components/Layout/TitleSelector";
 
 import "../../styles/pages/Containers/DashboardContainer.scss";
@@ -22,10 +19,8 @@ const drawerWidth = 250;
 const DashboardContainer = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const route = useSelector((state: RootState) => state.route.actualRoute);
 
-  const [isValid, setIsValid] = useState(true);
+  const [, setIsValid] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
@@ -42,17 +37,21 @@ const DashboardContainer = () => {
         setIsValid(isValid);
         if (!isValid) {
           localStorage.removeItem("token");
-          dispatch(setRoute("/login"));
           navigate("/login");
         }
       } else {
         setIsValid(false);
-        dispatch(setRoute("/login"));
         navigate("/login");
       }
     };
 
     verifyToken();
+
+    const intervalId = setInterval(() => {
+      verifyToken();
+    }, 300000);
+
+    return () => clearInterval(intervalId);
   }, [token]);
 
   return (
@@ -75,7 +74,7 @@ const DashboardContainer = () => {
           >
             <MenuIcon />
           </IconButton>
-          <TitleSelector route={route} />
+          <TitleSelector />
         </Toolbar>
       </AppBar>
       <Box

@@ -8,12 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { FormikValues, useFormik } from "formik";
 
 import { loginUser } from "../../services/apiService";
-import { setRoute } from "../../store/slices/route.slice";
 import { ILoginFormValues } from "../../interfaces/layout.interface";
 import { setSession, setToken } from "../../store/slices/session.slice";
 
 import "../../styles/components/LoginRegister.scss";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 const LoginComponent = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -38,7 +36,6 @@ const LoginComponent = () => {
       setSubmitting(true);
       const response = await loginUser(values);
       if (response.user?.isActive) {
-        console.log(response);
         const {
           token,
           user: { _id, name, lastName, roles },
@@ -46,7 +43,6 @@ const LoginComponent = () => {
 
         dispatch(setToken({ token }));
         localStorage.setItem("token", JSON.stringify(token));
-        console.log(_id, name, lastName, roles);
         dispatch(setSession({ _id, name, lastName, roles }));
 
         toast.success(
@@ -64,7 +60,6 @@ const LoginComponent = () => {
         );
 
         setTimeout(() => {
-          dispatch(setRoute("/dashboard"));
           navigate("/dashboard");
         }, 3200);
       } else {
