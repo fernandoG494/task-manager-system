@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/index";
 
 import { projectsMock } from "../../data/projects.data";
-import { IProject } from "../../interfaces/data.interface";
+import { IProject, ITask } from "../../interfaces/data.interface";
 import ProjectCard from "../../components/Dashboard/ProjectCard";
 
 import "../../styles/pages/Sections/Dashboard.scss";
+import { tasks } from "../../data/tasks.data";
+import TaskItem from "../../components/Dashboard/TaskItem";
 
 const DashboardPage = () => {
   const userName = useSelector((state: RootState) => state.session.name);
@@ -48,7 +50,18 @@ const DashboardPage = () => {
           </Stack>
         </div>
         <div className="recent-tasks">
-          <Stack direction="column">{}</Stack>
+          <div className="recent-tasks-title">{`Your recent tasks...`}</div>
+          <Stack direction="column">
+            {tasks.map(({ description, name, status }: ITask) => {
+              return (
+                <TaskItem
+                  description={description}
+                  name={name}
+                  status={status}
+                />
+              );
+            })}
+          </Stack>
         </div>
         <div className="recent-projects"></div>
         <div></div>

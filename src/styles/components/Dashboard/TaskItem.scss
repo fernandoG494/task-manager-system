@@ -1,0 +1,20 @@
+.task-container {
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 3px 4px;
+  margin: 2px 0px;
+  width: 100%;
+}
+
+.task-title {
+  font-weight: bolder;
+  margin-right: 4px;
+}
+
+.task-description {
+  font-weight: normal;
+}
+
+.task-status {
+  margin-left: auto;
+}
