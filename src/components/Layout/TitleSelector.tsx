@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-import { ITitleSelector } from "../../interfaces/layout.interfaces";
+import { ITitleSelector } from "../../interfaces/layout.interface";
 import { useEffect, useState } from "react";
 
 const TitleSelector = ({ route }: ITitleSelector) => {

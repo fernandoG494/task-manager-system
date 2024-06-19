@@ -6,11 +6,10 @@ import {
   MenuItem,
   MenuList,
   Stack,
-  Typography,
 } from "@mui/material";
 
 import { ReactSVG } from "react-svg";
-import { ISideMenu } from "../../interfaces/layout.interfaces";
+import { ISideMenu } from "../../interfaces/layout.interface";
 
 import IconLogo from "../../assets/svgs/check.svg";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -20,7 +19,7 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 
 import "../../styles/components/SideMenu.scss";
 
-const drawerWidth = 300;
+const drawerWidth = 250;
 
 const SideMenu = ({ setIsClosing, setMobileOpen, mobileOpen }: ISideMenu) => {
   const drawer = (

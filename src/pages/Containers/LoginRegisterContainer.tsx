@@ -4,15 +4,15 @@ import { Stack, Tab } from "@mui/material";
 import { TabList, TabPanel } from "@mui/lab";
 import TabContext from "@mui/lab/TabContext";
 
-import LoginComponent from "../components/Layout/LoginComponent";
-import RegisterComponent from "../components/Layout/RegisterComponent";
+import LoginComponent from "../../components/Layout/LoginComponent";
+import RegisterComponent from "../../components/Layout/RegisterComponent";
 
-import "../styles/pages/LoginRegisterPage.scss";
+import IconLogo from "../../assets/svgs/check.svg";
+import PanelImage from "../../assets/pngs/span-image.jpg";
 
-import IconLogo from "../assets/svgs/check.svg";
-import PanelImage from "../assets/pngs/span-image.jpg";
+import "../../styles/pages/Containers/LoginRegisterContainer.scss";
 
-const LoginRegisterPage = () => {
+const LoginRegisterContainer = () => {
   const [value, setValue] = useState("1");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -73,4 +73,4 @@ const LoginRegisterPage = () => {
   );
 };
 
-export default LoginRegisterPage;
+export default LoginRegisterContainer;

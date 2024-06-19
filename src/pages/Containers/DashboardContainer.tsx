@@ -1,33 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 
-import { RootState } from "../store";
-import { validToken } from "../services/apiService";
-import SideMenu from "../components/Layout/SideMenu";
-import { setRoute } from "../store/slices/route.slice";
+import { RootState } from "../../store";
+import { validToken } from "../../services/apiService";
+import SideMenu from "../../components/Layout/SideMenu";
+import { setRoute } from "../../store/slices/route.slice";
+import TitleSelector from "../../components/Layout/TitleSelector";
 
-import "../styles/pages/DashboardPage.scss";
-import TitleSelector from "../components/Layout/TitleSelector";
+import "../../styles/pages/Containers/DashboardContainer.scss";
 
-const drawerWidth = 300;
+const drawerWidth = 250;
 
-const DashboardPage = () => {
+const DashboardContainer = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const route = useSelector((state: RootState) => state.route.actualRoute);
 
   const [isValid, setIsValid] = useState(true);
-
   const [isClosing, setIsClosing] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
@@ -91,9 +89,10 @@ const DashboardPage = () => {
         }}
       >
         <Toolbar />
+        <Outlet />
       </Box>
     </Box>
   );
 };
 
-export default DashboardPage;
+export default DashboardContainer;

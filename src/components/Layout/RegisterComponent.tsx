@@ -7,7 +7,7 @@ import { FormikValues, useFormik } from "formik";
 import { toast } from "react-toastify";
 
 import { registerUser } from "../../services/apiService";
-import { IRegisterFormValues } from "../../interfaces/layout.interfaces";
+import { IRegisterFormValues } from "../../interfaces/layout.interface";
 
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/components/LoginRegister.scss";

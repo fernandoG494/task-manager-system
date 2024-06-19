@@ -4,6 +4,7 @@ import { ISessionStore } from "../../interfaces/store.interface";
 const initialState: ISessionStore = {
   _id: "",
   name: "",
+  lastName: "",
   roles: [],
   token: "",
 };
@@ -15,6 +16,7 @@ const sessionSlice = createSlice({
     setSession: (state, action) => {
       state._id = action.payload._id;
       state.name = action.payload.name;
+      state.lastName = action.payload.lastName;
       state.roles = action.payload.roles;
     },
     setToken: (state, action) => {
