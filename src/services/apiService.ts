@@ -33,8 +33,10 @@ export const loginUser = async (userData: any) => {
 };
 
 export const validToken = async (token: string | null | undefined) => {
+  let cleanedToken = cleanToken(token);
+
   const config = {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${cleanedToken}` },
   };
 
   let tokenInfo;
@@ -48,5 +50,28 @@ export const validToken = async (token: string | null | undefined) => {
     return false;
   }
 };
+
+export const retriveUsersInfo = async (token: string | null | undefined) => {
+  let cleanedToken = cleanToken(token);
+
+  const config = {
+    headers: { Authorization: `Bearer ${cleanedToken}` },
+  };
+
+  let userInfo;
+  if (token) {
+    userInfo = await api.get("/user/me", config);
+  }
+
+  return userInfo;
+};
+
+function cleanToken(token: string | null | undefined) {
+  if (token && token.charAt(0) === '"') {
+    return token.replace(/"/g, "");
+  } else {
+    return token;
+  }
+}
 
 export default api;
